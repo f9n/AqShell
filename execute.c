@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <sys/types.h>
 #include <ctype.h>
 #include <unistd.h>
