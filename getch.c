@@ -1,4 +1,5 @@
 #include <termios.h>
+#include <stdio.h>
 #include "getch.h"
 /*
   # getch() and getche() in linux
