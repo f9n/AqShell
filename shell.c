@@ -14,9 +14,10 @@
 #define BACKSPACE 127
 #define HORIZONTAL_TAB 9
 #define VERTIVAL_TAB 11
+#define CONTROL_L 12
+#define CONTROL_C 3
 
 void displayPrompt(char * username, char * hostname, char * pwd) {
-  // display pdw
   // [username@hostname pwd]$
   printf("[%s@%s %s]$ ", username, hostname, pwd);
 }
@@ -88,7 +89,12 @@ void ShellMenu(void) {
 		}
     } else if (CharInput == HORIZONTAL_TAB || CharInput == VERTIVAL_TAB) { // Horizontal Tab or Vertical Tab
 		printf("Pressed Horizontal Tab\n");
-    } else {
+    } else if (CharInput == CONTROL_L) {
+        system("clear");
+	} else if (CharInput == CONTROL_C) { // Problem!!!
+		printf("Bye");
+		exit(0);
+	} else {
 		printf("%c", CharInput);
 		input[index] = CharInput;
 		index++;
