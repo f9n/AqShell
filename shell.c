@@ -1,6 +1,7 @@
 /**
  * References:
- * 	- https://stackoverflow.com/questions/24708700/c-detect-when-user-presses-arrow-key
+ *  - https://stackoverflow.com/questions/24708700/c-detect-when-user-presses-arrow-key
+ *  - https://academic.evergreen.edu/projects/biophysics/technotes/program/ascii_ctrl.htm
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,6 +17,7 @@
 #define VERTIVAL_TAB 11
 #define CONTROL_L 12
 #define CONTROL_C 3
+#define CONTROL_D 4
 
 void displayPrompt(char * username, char * hostname, char * pwd) {
   // [username@hostname pwd]$
@@ -88,16 +90,15 @@ void ShellMenu(void) {
 			input[index] = 0;
 		}
     } else if (CharInput == HORIZONTAL_TAB || CharInput == VERTIVAL_TAB) { // Horizontal Tab or Vertical Tab
-		printf("Pressed Horizontal Tab\n");
+	  printf("Pressed Horizontal Tab\n");
     } else if (CharInput == CONTROL_L) {
-        system("clear");
-	} else if (CharInput == CONTROL_C) { // Problem!!!
-		printf("Bye");
-		exit(0);
-	} else {
-		printf("%c", CharInput);
-		input[index] = CharInput;
-		index++;
+	  system("clear");
+    } else if (CharInput == CONTROL_C || CharInput == CONTROL_D) {
+	  exit(0);
+    }else {
+	  printf("%c", CharInput);
+	  input[index] = CharInput;
+	  index++;
     }
   }// while
 
