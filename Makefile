@@ -1,25 +1,43 @@
 CC=gcc
 
+all:
+	mkdir -p obj bin
+	@echo "Created obj bin directory!"
+
+compile:	bin/aqshell
+
+help:
+	@echo "make compile   : compile source code"
+	@echo "make run       : compiler source code and run"
+	@echo "make clean     : delete all obj file and executable file."
+	@echo "Before compiler source code, you should create obj bin directory with this command: make all"
+
+bin/aqshell: obj/main.o obj/getch.o obj/execute.o obj/menu.o obj/shell.o obj/history.o
+	$(CC) obj/main.o obj/getch.o obj/execute.o obj/menu.o obj/shell.o obj/history.o -o bin/aqshell
+
 main: main.o getch.o execute.o menu.o shell.o history.o
-	$(CC) main.o getch.o execute.o menu.o shell.o history.o -o shell
+	$(CC) main.o getch.o execute.o menu.o shell.o history.o -o aqshell
 
-main.o: main.c
-	$(CC) -c main.c -o main.o
+obj/main.o: src/main.c
+	$(CC) -c src/main.c -o obj/main.o
 
-getch.o: getch.c
-	$(CC) -c getch.c -o getch.o
+obj/getch.o: src/getch.c
+	$(CC) -c src/getch.c -o obj/getch.o
 
-execute.o: execute.c
-	$(CC) -c execute.c -o execute.o
+obj/execute.o: src/execute.c
+	$(CC) -c src/execute.c -o obj/execute.o
 
-menu.o: menu.c
-	$(CC) -c menu.c -o menu.o
+obj/menu.o: src/menu.c
+	$(CC) -c src/menu.c -o obj/menu.o
 
-shell.o: shell.c
-	$(CC) -c shell.c -o shell.o
+obj/shell.o: src/shell.c
+	$(CC) -c src/shell.c -o obj/shell.o
 
-history.o: history.c
-	$(CC) -c history.c -o history.o
+obj/history.o: src/history.c
+	$(CC) -c src/history.c -o obj/history.o
+
+run: bin/aqshell
+	./bin/aqshell
 
 clean:
-	rm -f *.o shell \#* *~
+	rm -f obj/* bin/aqshell \#* *~
