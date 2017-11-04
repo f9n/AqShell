@@ -4,10 +4,7 @@
         # getch() and getche() in linux
         https://stackoverflow.com/questions/3276546/how-to-implement-getch-function-of-c-in-linux
     */
-    #include <termios.h>
-
-    static struct termios old, new;
-
+    
     /* Initialize new terminal i/o settings */
     void initTermios(int echo);
 

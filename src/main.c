@@ -2,7 +2,7 @@
 #include "shell.h"
 
 int main() {
-  //startingMenu();
+  StartingMenu();
   ShellMenu();
   return 0;
 }

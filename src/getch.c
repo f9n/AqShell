@@ -1,10 +1,13 @@
 #include <termios.h>
 #include <stdio.h>
 #include "getch.h"
+
 /*
   # getch() and getche() in linux
   https://stackoverflow.com/questions/3276546/how-to-implement-getch-function-of-c-in-linux
 */
+
+static struct termios old, new;
 
 /* Initialize new terminal i/o settings */
 void initTermios(int echo) {

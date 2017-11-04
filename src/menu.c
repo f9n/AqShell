@@ -5,7 +5,7 @@
 #include <unistd.h> // usleep warning
 #include "menu.h"
 
-void startingMenu(void) {
+void StartingMenu(void) {
     char* starting = "Starting the Project";
     char starting2[20];
     char ch, buff;
