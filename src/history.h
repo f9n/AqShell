@@ -10,4 +10,5 @@
   struct Node* GetNewNode(char * command);
   struct Node* InsertAtHead(struct Node * head, char * input);
   void Print(struct Node * head);
+  void FreeContent(struct Node* head);
 #endif

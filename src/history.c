@@ -25,9 +25,19 @@ struct Node* InsertAtHead(struct Node* head, char * input) {
 
 void Print(struct Node* head) {
   struct Node* temp = head;
+  while(temp != NULL) {
+    printf("%s\n",temp->commandName);
+    temp = temp->next;
+  }
+  printf("\n");
+}
+
+void FreeContent(struct Node* head) {
+  struct Node* temp = head;
+	 struct Node* temp2 = NULL;
 	 while(temp != NULL) {
-		  printf("%s\n",temp->commandName);
-		  temp = temp->next;
-	 }
-	 printf("\n");
+	   temp2 = temp;
+	   temp = temp->next;
+	   free(temp2);
+  }
 }
