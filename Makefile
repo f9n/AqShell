@@ -1,7 +1,7 @@
 CC=gcc
 
-main: main.o getch.o execute.o menu.o shell.o
-	$(CC) main.o getch.o execute.o menu.o shell.o -o shell
+main: main.o getch.o execute.o menu.o shell.o history.o
+	$(CC) main.o getch.o execute.o menu.o shell.o history.o -o shell
 
 main.o: main.c
 	$(CC) -c main.c -o main.o
@@ -17,6 +17,9 @@ menu.o: menu.c
 
 shell.o: shell.c
 	$(CC) -c shell.c -o shell.o
+
+history.o: history.c
+	$(CC) -c history.c -o history.o
 
 clean:
 	rm -f *.o shell \#* *~

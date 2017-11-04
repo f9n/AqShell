@@ -9,8 +9,7 @@
 #include "getch.h"
 #include "execute.h"
 #include "shell.h"
-
-#define INPUT_LEN 100
+#include "history.h"
 #define ENTER 10
 #define BACKSPACE 127
 #define HORIZONTAL_TAB 9
@@ -26,6 +25,7 @@ void displayPrompt(char * username, char * hostname, char * pwd) {
 
 void ShellMenu(void) {
   char * input = malloc(sizeof(char) * INPUT_LEN);
+  struct Node* head = NULL;
   char * _USERNAME = getenv("USER");
   char * _HOSTNAME = getenv("HOSTNAME");
   char * _PWD = getenv("PWD");
@@ -36,11 +36,11 @@ void ShellMenu(void) {
   /*
 		Tasks:
 		Parse input. Check exists 'cd' command in input. and then modify _PWD variable
-		Check exit
+		Parse Pipe(|)
   */
   while(1) {
     if (index == 0 && isDeleted == 1) {
-		    displayPrompt(_USERNAME, _HOSTNAME, _PWD);
+		   displayPrompt(_USERNAME, _HOSTNAME, _PWD);
 		  }
     CharInput = getch();
     // Up, Down, Left, Right key
@@ -74,7 +74,8 @@ void ShellMenu(void) {
       printf("\n");
       isDeleted = 1;
       if (index != 0) {
-        //SaveCommandToHistory(input);
+        head = InsertAtHead(head, input);
+        Print(head);
         result = execute(input);
         index = 0;
         memset(input, 0, INPUT_LEN); // set empty
