@@ -5,6 +5,8 @@
 #include <errno.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <string.h>
+#include <stdlib.h>
 #include "execute.h"
 
 pid_t pid = -1 ; //Global
