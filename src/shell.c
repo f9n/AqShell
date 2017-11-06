@@ -11,14 +11,6 @@
 #include "shell.h"
 #include "history.h"
 
-#define ENTER 10
-#define BACKSPACE 127
-#define HORIZONTAL_TAB 9
-#define VERTIVAL_TAB 11
-#define CONTROL_L 12
-#define CONTROL_C 3
-#define CONTROL_D 4
-
 void displayPrompt(char * username, char * hostname, char * pwd) {
   // [username@hostname pwd]$
   printf("[%s@%s %s]$ ", username, hostname, pwd);
@@ -30,6 +22,7 @@ void getBackInLine(int size) {
     printf("\b \b");
   }
 }
+
 void ShellMenu(void) {
   char * input = malloc(sizeof(char) * INPUT_LEN);
   struct Node* head = NULL;
@@ -46,7 +39,8 @@ void ShellMenu(void) {
   /*
 		Tasks:
 		Parse input. Check exists 'cd' command in input. and then modify _PWD variable
-		Parse Pipe(|)
+    Parse Pipe(|)
+    Pipe Command Stdout to Other Command Stdin
   */
   while(1) {
     if (index == 0 && isDeleted == 1 && isPressedUp == 1 && isPressedDown == 1) {
@@ -122,7 +116,7 @@ void ShellMenu(void) {
       isPressedUp = 1;
       if (index != 0) {
         head = InsertAtHead(head, input);
-        //Print(head);
+        //Print(head); print all history command
         temp = head;
         result = execute(input);
         index = 0;

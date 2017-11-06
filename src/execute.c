@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "execute.h"
+#include "parserPipe.h"
 
 pid_t pid = -1 ; //Global
 
@@ -20,9 +21,10 @@ int execute(char* command) {
     if (strcmp(command, "exit") == 0) {
       exit(0);
     }
-   // concat 2 string.
-   // First string is "cd Pwd";
-   // Second string is "ls -la";
+    struct parser parser_result = Parser(command);
+    //PrintCommands(parser_result);
+    FreeCommandsInParserStruct(parser_result);
+    // cd is problem!
     /* fork another process */
     pid = fork();
     if (pid < 0) { /* error occurred */
