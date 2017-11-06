@@ -12,11 +12,8 @@ help:
 	@echo "make clean     : delete all obj file and executable file."
 	@echo "Before compiler source code, you should create obj bin directory with this command: make all"
 
-bin/aqshell: obj/main.o obj/getch.o obj/execute.o obj/menu.o obj/shell.o obj/history.o
-	$(CC) obj/main.o obj/getch.o obj/execute.o obj/menu.o obj/shell.o obj/history.o -o bin/aqshell
-
-main: main.o getch.o execute.o menu.o shell.o history.o
-	$(CC) main.o getch.o execute.o menu.o shell.o history.o -o aqshell
+bin/aqshell: obj/main.o obj/getch.o obj/execute.o obj/menu.o obj/shell.o obj/history.o obj/parserPipe.o
+	$(CC) obj/main.o obj/getch.o obj/execute.o obj/menu.o obj/shell.o obj/history.o obj/parserPipe.o -o bin/aqshell
 
 obj/main.o: src/main.c
 	$(CC) -c src/main.c -o obj/main.o
@@ -35,6 +32,9 @@ obj/shell.o: src/shell.c
 
 obj/history.o: src/history.c
 	$(CC) -c src/history.c -o obj/history.o
+
+obj/parserPipe.o: src/parserPipe.c
+	$(CC) -c src/parserPipe.c -o obj/parserPipe.o
 
 run: bin/aqshell
 	./bin/aqshell
