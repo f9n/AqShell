@@ -2,6 +2,7 @@
  * References:
  *  - https://stackoverflow.com/questions/24708700/c-detect-when-user-presses-arrow-key
  *  - https://academic.evergreen.edu/projects/biophysics/technotes/program/ascii_ctrl.htm
+ *  - https://stackoverflow.com/questions/3219393/stdlib-and-colored-output-in-c
 */
 #include <stdio.h>
 #include <stdlib.h>
