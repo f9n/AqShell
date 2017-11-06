@@ -6,7 +6,7 @@
 #include "menu.h"
 
 void StartingMenu(void) {
-    char* starting = "Starting the Project";
+    char* starting = "Starting the Shell";
     char starting2[20];
     char ch, buff;
     for(int i=1; i < 5; i++) {
