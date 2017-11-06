@@ -41,14 +41,15 @@ void ShellMenu(void) {
   int result = 0; // $?  last command status
   int index = 0;
   int isDeleted = 1; // 1 is False and 0 is True. isDeleted = deleted shell command status.
-  int isUsedUpDownKey = 1;
+  int isPressedUp = 1;
+  int isPressedDown = 1;
   /*
 		Tasks:
 		Parse input. Check exists 'cd' command in input. and then modify _PWD variable
 		Parse Pipe(|)
   */
   while(1) {
-    if (index == 0 && isDeleted == 1 && isUsedUpDownKey == 1) {
+    if (index == 0 && isDeleted == 1 && isPressedUp == 1 && isPressedDown == 1) {
 		    displayPrompt(_USERNAME, _HOSTNAME, _PWD);
     }
     CharInput = getch();
@@ -59,10 +60,17 @@ void ShellMenu(void) {
         CharInput = getch();
         switch(CharInput) {
         case 65:
-          isUsedUpDownKey = 0;
+          isPressedUp = 0;
+          if (isPressedDown == 0 && temp != NULL) {
+            if (temp->next != NULL) {
+              temp = temp->next;
+              isPressedDown = 1;
+            }
+          }
           if(head != NULL) {
             memset(input, 0, INPUT_LEN); // set empty
             getBackInLine(index);
+            if (temp == NULL) temp = head;
             index = strlen(temp->commandName);
             strcpy(input, temp->commandName);
             printf("%s", input);
@@ -73,14 +81,22 @@ void ShellMenu(void) {
           break;
 
         case 66:
-          isUsedUpDownKey = 0;
+          isPressedDown = 0;
+          if (isPressedUp == 0 && temp != NULL) {
+            if (temp->prev != NULL) {
+              temp = temp->prev;
+              isPressedUp = 1;
+            }
+          }
           if(head != NULL) {
             memset(input, 0, INPUT_LEN); // set empty
             getBackInLine(index);
-            index = strlen(temp->commandName);
-            strcpy(input, temp->commandName);
-            printf("%s", input);
-            if(temp->prev != NULL) {
+            if (temp == NULL) {
+              index = 0;
+            } else {
+              index = strlen(temp->commandName);
+              strcpy(input, temp->commandName);
+              printf("%s", input);
               temp = temp->prev;
             }
           }
@@ -102,10 +118,11 @@ void ShellMenu(void) {
      //printf("Pressed Enter key!\n");
       printf("\n");
       isDeleted = 1;
-      isUsedUpDownKey = 1;
+      isPressedDown = 1;
+      isPressedUp = 1;
       if (index != 0) {
         head = InsertAtHead(head, input);
-        Print(head);
+        //Print(head);
         temp = head;
         result = execute(input);
         index = 0;
@@ -118,6 +135,8 @@ void ShellMenu(void) {
         printf("\b \b");
         index--;
         input[index] = 0;
+      } else {
+        temp = head;
       }
     } else if (CharInput == HORIZONTAL_TAB || CharInput == VERTIVAL_TAB) { // Horizontal Tab or Vertical Tab
       printf("Pressed Horizontal Tab\n");
