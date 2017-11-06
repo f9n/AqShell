@@ -12,8 +12,16 @@
 #include "history.h"
 
 void displayPrompt(char * username, char * hostname, char * pwd) {
+  // Next time, create PS1 variable and parser!
   // [username@hostname pwd]$
-  printf("[%s@%s %s]$ ", username, hostname, pwd);
+  printf("[");
+  printf(ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET , username);
+  printf("@");
+  printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET , hostname);
+  printf(ANSI_COLOR_MAGENTA " %s" ANSI_COLOR_RESET, pwd);
+  printf("]");
+  printf("$ ");
+  //printf("[%s@%s %s]$ ", username, hostname, pwd);
 }
 
 void getBackInLine(int size) {
